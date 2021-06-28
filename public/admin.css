@@ -1,0 +1,17 @@
+.imgbox{
+
+padding: 4%;
+}
+
+img.imgg{
+    align-items: center;
+    height: 4.5%!important;
+}
+
+.mybtn{
+    width: 100%!important;
+}
+
+.col-lg-7{
+    height: 20%;
+}

@@ -1,0 +1,335 @@
+| <!DOCTYPE html>
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Mohit-chaudhary-Portfolio
+    meta(content='width=device-width, initial-scale=1.0' name='viewport')
+    meta(content='mohit chaudhary portfolio' name='keywords')
+    meta(content='here is the best developer portfolio mohit chaudhary portfolio' name='description')
+
+    // Favicon
+    link(href='/img/favicon.png', rel='icon')
+    // Google Font
+    link(href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap', rel='stylesheet')
+    // CSS Libraries
+    link(href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' ,rel='stylesheet')
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css' ,rel='stylesheet')
+    link(href='animate.min.css' ,rel='stylesheet')
+    link(href='owl.carousel.min.css', rel='stylesheet')
+
+    // Template Stylesheet
+    link(rel="stylesheet", href="style.css")
+  body(data-spy='scroll' data-target='.navbar' data-offset='51') 
+    // Nav Bar Start
+    .navbar.navbar-expand-lg.bg-light.navbar-light
+      .container-fluid
+        a.navbar-brand(href='index.html') Portfolio
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarCollapse')
+          span.navbar-toggler-icon
+        #navbarCollapse.collapse.navbar-collapse.justify-content-between
+          .navbar-nav.ml-auto
+            a.nav-item.nav-link.active(href='#home') Home
+            a.nav-item.nav-link(href='#about') About
+            a.nav-item.nav-link(href='#service') Service
+            a.nav-item.nav-link(href='#news') News
+            a.nav-item.nav-link(href='#experience') Experience
+            a.nav-item.nav-link(href='#portfolio') Portfolio
+            a.nav-item.nav-link(href='#review') Review
+            a.nav-item.nav-link(href='#contact') Contact
+    // Nav Bar End
+    // Hero Start
+    #home.hero
+      .container-fluid
+        .row.align-items-center
+          .col-sm-12.col-md-6
+            .hero-content
+              .hero-text
+                p I'm
+                h1= profile_set.name
+                h2 
+                .typed-text= profile_set.typed_text
+              .hero-btn
+                a.btn(href='#contact') Hire Me
+                a.btn(href='#footer') Contact Me
+          .col-sm-12.col-md-6.d-none.d-md-block
+            .hero-image
+              img(src= 'data:image/png;base64,'+ profile_set.img.data alt='Hero Image')
+    // Hero End
+    // About Start
+    #about.about.wow.fadeInUp(data-wow-delay='0.1s')
+      .container-fluid
+        .row.align-items-center
+          .col-lg-6
+            .about-img
+              img(src='portfolio-2.jpg' alt='Image')
+          .col-lg-6
+            .about-content
+              .section-header.text-left
+                p Learn About Me
+                h2= profile_set.heading
+              .about-text
+                p= profile_set.heading_para
+              .skills
+                each val in skill_set
+                  .skill-name
+                    p= val.skill_name
+                    p= val.percent+"%"
+                  .progress
+                    .progress-bar(role='progressbar' aria-valuenow= val.percent aria-valuemin='0' aria-valuemax='100')
+              a.btn(href='') Download resume(coming soon)
+  
+    // About End
+    // Service Start
+    #service.service
+      .container
+        .section-header.text-center.wow.zoomIn(data-wow-delay='0.1s')
+          p What I do
+          h2 Awesome Quality Services
+        .row
+          each val in service_set
+            .col-lg-6.wow.fadeInUp(data-wow-delay='0.0s')
+              .service-item
+                .service-icon
+                  i.fa.fa-laptop-code
+                .service-text
+                  h3= val.service_heading
+                  p= val.service_para
+
+    // Service End
+    // Experience Start
+    #experience.experience
+      .container
+        header.section-header.text-center.wow.zoomIn(data-wow-delay='0.1s')
+          p My Resume
+          h2 Working Experience
+        .timeline
+          each val in exp_set
+            if val.left
+              .timeline-item.left.wow.slideInLeft(data-wow-delay='0.1s')
+                .timeline-text
+                  .timeline-date= val.duration
+                  h2= val.exp_heading
+                  h4= val.exp_sub_heading
+                  p= val.exp_para
+            else
+              .timeline-item.right.wow.slideInRight(data-wow-delay='0.1s')
+                .timeline-text
+                  .timeline-date= val.duration
+                  h2= val.exp_heading
+                  h4= val.exp_sub_heading
+                  p= val.exp_para
+    // Job Experience End
+    // Banner Start
+    #news.banner.wow.zoomIn(data-wow-delay='0.1s')
+      .container
+        .section-header.text-center
+          
+          h2= news_set.news_heading
+        .container.banner-text
+          p= news_set.news_para
+          a.btn(href=news_set.btn_link)=news_set.news_btn
+    // Banner End
+    // Portfolio Start
+    #portfolio.portfolio
+      .container
+        .section-header.text-center.wow.zoomIn(data-wow-delay='0.1s')
+          p My Portfolio
+          h2 My Works
+        .row
+          .col-12
+            ul#portfolio-filter
+              li.filter-active(data-filter='*') All
+              li(data-filter='.filter-1') Websites
+              li(data-filter='.filter-2') Frontend sites
+              li(data-filter='.filter-3') Scraping tools
+              li(data-filter='.filter-4') Python projects
+        .row.portfolio-container
+          each project in project_set
+            if project.category == 'website'
+              .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-1.wow.fadeIn(data-wow-delay='0.0s')
+                .portfolio-wrap
+                  .portfolio-img
+                    img(src='portfolio-1.jpg' alt='Image')
+                  .blog-text
+                    h2= project.project_heading
+                    p= project.project_para
+                    a.btn(href= project.github_link) Github link 
+                      i.fa.fa-angle-right
+
+            else if project.category == 'scraping tool'
+              .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-3.wow.fadeIn(data-wow-delay='0.0s')
+                .portfolio-wrap
+                  .portfolio-img
+                    img(src='portfolio-2.jpg' alt='Image')
+                  .blog-text
+                    h2= project.project_heading
+                    p= project.project_para
+                    a.btn(href= project.github_link) Github link 
+                      i.fa.fa-angle-right
+            else if project.category == 'frontend'
+              .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-2.wow.fadeIn(data-wow-delay='0.0s')
+                .portfolio-wrap
+                  .portfolio-img
+                    img(src='portfolio-3.jpg' alt='Image')
+                  .blog-text
+                    h2= project.project_heading
+                    p= project.project_para
+                    a.btn(href= project.github_link) Github link 
+                      i.fa.fa-angle-right
+            else
+              .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-4.wow.fadeIn(data-wow-delay='0.0s')
+                .portfolio-wrap
+                  .portfolio-img
+                    img(src='portfolio-4.jpg' alt='Image')
+                  .blog-text
+                    h2= project.project_heading
+                    p= project.project_para
+                    a.btn(href= project.github_link) Github link 
+                      i.fa.fa-angle-right
+          //- .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-2.wow.fadeIn(data-wow-delay='0.2s')
+          //-   .portfolio-wrap
+          //-     .portfolio-img
+          //-       img(src='img/portfolio-2.jpg' alt='Image')
+          //-     .blog-text
+          //-       h2 Lorem ipsum dolor sit amet
+          //-       p
+          //-         | Lorem ipsum dolor sit amet elnare mattis nisl massa et eros vitae pulvin
+          //-       a.btn(href='') Github link 
+          //-         i.fa.fa-angle-right
+          //- .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-3.wow.fadeIn(data-wow-delay='0.4s')
+          //-   .portfolio-wrap
+          //-     .portfolio-img
+          //-       img(src='img/portfolio-3.jpg' alt='Image')
+          //-     .blog-text
+          //-       h2 Lorem ipsum dolor sit amet
+          //-       p
+          //-         | Lorem ipsum dolor sit amet elnare mattis nisl massa et eros vitae pulvin
+          //-       a.btn(href='') Github link 
+          //-         i.fa.fa-angle-right
+          //- .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-3.wow.fadeIn(data-wow-delay='0.6s')
+          //-   .portfolio-wrap
+          //-     .portfolio-img
+          //-       img(src='img/portfolio-4.jpg' alt='Image')
+          //-     .blog-text
+          //-       h2 Lorem ipsum dolor sit amet
+          //-       p
+          //-         | Lorem ipsum dolor sit amet elnare mattis nisl massa et eros vitae pulvin
+          //-       a.btn(href='') Github link 
+          //-         i.fa.fa-angle-right
+          //- .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-3.wow.fadeIn(data-wow-delay='0.8s')
+          //-   .portfolio-wrap
+          //-     .portfolio-img
+          //-       img(src='img/portfolio-5.jpg' alt='Image')
+          //-     .blog-text
+          //-       h2 Lorem ipsum dolor sit amet
+          //-       p
+          //-         | Lorem ipsum dolor sit amet elnare mattis nisl massa et eros vitae pulvin
+          //-       a.btn(href='') Github link 
+          //-         i.fa.fa-angle-right
+          //- .col-lg-4.col-md-6.col-sm-12.portfolio-item.filter-3.wow.fadeIn(data-wow-delay='0.9')
+          //-   .portfolio-wrap
+          //-     .portfolio-img
+          //-       img(src='img/portfolio-6.jpg' alt='Image')
+          //-     .blog-text
+          //-       h2 Lorem ipsum dolor sit amet
+          //-       p
+          //-         | Lorem ipsum dolor sit amet elnare mattis nisl massa et eros vitae pulvin
+          //-       a.btn(href='') Github link 
+          //-         i.fa.fa-angle-right
+        
+    // Portfolio End
+    // Testimonial Start
+    #review.testimonial
+      .container
+        .testimonial-icon
+          h1.text-white Testimonials
+        .owl-carousel.testimonials-carousel
+          each val in testi_set
+            .testimonial-item
+              .testimonial-img
+                img(src='user.png' alt='Image')
+              .testimonial-text
+                p= val.testi_para
+                h3= val.testi_heading
+                h4= val.work
+    // Testimonial End
+    // Contact Start
+    #contact.contact.wow.fadeInUp(data-wow-delay='0.1s')
+      .container-fluid
+        .container
+          .row.align-items-center
+            .col-md-4
+            .col-md-8
+              .contact-form
+                h1.text-white.pb-4 Let's connect
+                #success
+                form#contactForm(action="/admin" method="post" name='sentMessage')
+                  .control-group
+                    input#name.form-control(type='text' placeholder='Your Name' required='required' data-validation-required-message='Please enter your name')
+                    p.help-block
+                  .control-group
+                    input#email.form-control(type='email' placeholder='Your Email' required='required' data-validation-required-message='Please enter your email')
+                    p.help-block
+                  .control-group
+                    input#subject.form-control(type='text' placeholder='Subject' required='required' data-validation-required-message='Please enter a subject')
+                    p.help-block
+                  .control-group
+                    textarea#message.form-control(placeholder='Message' required='required' data-validation-required-message='Please enter your message')
+                    p.help-block
+                  div
+                    button#sendMessageButton.btn(type='submit') Send Message
+    // Contact End
+
+    // Footer Start
+    #footer.footer.wow.fadeIn(data-wow-delay='0.3s')
+      .container-fluid
+        .container
+          .footer-info
+            h1.text-white.pb-3 Contact us
+            h3= footer_set.add
+            .footer-menu
+              p= footer_set.no
+              p= footer_set.gmail
+            .footer-social
+              a(target="_blank",href= footer_set.github)
+                i.fab.fa-github
+              a(target="_blank",href= footer_set.fb)
+                i.fab.fa-facebook-f
+              a(target="_blank",href= footer_set.twit)
+                i.fab.fa-twitter
+              a(target="_blank",href= footer_set.insta)
+                i.fab.fa-instagram
+              a(target="_blank",href= footer_set.linkedin)
+                i.fab.fa-linkedin-in
+        .container.copyright
+          p &copy; 
+            a(href='/') Mohit-chadhary-postfolio
+            | , All Right Reserved | Designed By Mohit Chaudhary
+            
+    // Footer End
+    // Back to top button
+    a.btn.back-to-top(href='#')
+      i.fa.fa-chevron-up
+    // Pre Loader
+    #loader.show
+     .loader
+
+
+    // JavaScript Libraries
+
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src= 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+    <script src="wow.min.js"></script>
+    <script src="waypoints.min.js"></script>
+    <script src="typed.min.js"></script>
+    <script src="owl.carousel.min.js"></script>
+    <script src="isotope.pkgd.min.js"></script>
+
+    //- //-  Contact Javascript File
+    <script src="jqBootstrapValidation.min.js"></script>
+    <script src="contact.js"></script>
+
+    //-  Template Javascript 
+    <script src="main.js"></script>
+
