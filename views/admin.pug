@@ -1,0 +1,244 @@
+html(lang='en')
+  head
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    // Bootstrap CSS
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css' ,rel='stylesheet') 
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+    link(rel='stylesheet' href='/admin.css' )
+
+    title Admin panel
+  body
+  p#demo.d-none= status 
+    .container-fluid
+      // NAVBAR STARTS
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+        a.navbar-brand(href='#')
+          h2= status
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        #navbarSupportedContent.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Profile
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Service
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Exp
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | News 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Portfolio 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Testimonial 
+                span.sr-only (current)
+            li.nav-item.active
+              a.nav-link(href='#')
+                | Footer 
+                span.sr-only (current)
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                | View site
+              .dropdown-menu(aria-labelledby='navbarDropdown')
+                a.dropdown-item(href='/' target='_blank') Open in new tab
+                a.dropdown-item(href='/') Open here and log off
+          form.form(action="/updatesite" method="post" style='margin-block-end: 0em;')
+            input.btn.btn-outline-success.my-2.my-sm-0.form-control( name='update' type='button' aria-label="Recipient's username" aria-describedby='button-addon2' value='update site' onclick = 'this.form.submit();')
+          li.nav-item.dropdown.list-unstyled
+            a#navbarDropdown.nav-link.dropdown-toggle.text-white(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              | Profile
+            .dropdown-menu(aria-labelledby='navbarDropdown')
+              a.dropdown-item(href='#') add user
+              a.dropdown-item(href='#') change name
+              a.dropdown-item(href='#') change username
+              a.dropdown-item(href='#') change password
+              .dropdown-divider
+              a.dropdown-item(href='#') logout
+          a.navbar-brand(href='#')
+            img(src='../static/img/testimonial-2.jpg' width='30' height='30' alt='' loading='lazy')
+      // NAVBAR ENDS
+      #myalt
+
+      // PROFILE SECTION  STARTS
+      .row
+        .col
+          #profile.profile-section.mt-3
+            h1.text-center Profile Section
+            form(action="/uploadpimg" method="post" enctype="multipart/form-data")
+              .input-group
+                label.col-sm-2.col-form-label(for='inputGroupFile02') Profile photo :
+                .custom-file
+                  input#inputGroupFile02.custom-file-input(name='image' type='file')
+                  label.custom-file-label(for='inputGroupFile02' aria-describedby='inputGroupFileAddon02') Choose file
+                .input-group-append
+                  button#inputGroupFileAddon02.btn.btn-outline-success.my-2.my-sm-0.form-control(type='button' onclick = 'this.form.submit();' ) upload
+
+            form(action="/updateprofile", method="post") 
+              .input-group.mb-3
+                label.col-sm-2.col-form-label(for='inp1') Name :
+                input#inp1.form-control(name='name' type='text' aria-label="Recipient's username" value= profile_set.name disabled)
+                .input-group-append
+                  button#btn1.btn.btn-outline-secondary(type='button' )
+                    i.fa.fa-lock
+              .input-group.mb-3
+                label.col-sm-2.col-form-label(for='inp2') Typed-text :
+                input#inp2.form-control( name='text' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.typed_text disabled)
+                .input-group-append
+                  button#btn2.btn.btn-outline-secondary(type='button' )
+                    i.fa.fa-lock
+              .input-group.mb-3
+                label.col-sm-2.col-form-label(for='inp3') Heading :
+                input#inp3.form-control( name='heading' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading disabled)
+                .input-group-append
+                  button#btn3.btn.btn-outline-secondary(type='button' )
+                    i.fa.fa-lock
+              .input-group.mb-3
+                label.col-sm-2.col-form-label(for='inp4') Heading-para :
+                input#inp4.form-control( name='headingpara' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading_para disabled)
+                .input-group-append
+                  button#btn4.btn.btn-outline-secondary(type='button' )
+                    i.fa.fa-lock
+              button#btn2.btn.mybtn.btn-outline-success.text-center(type='submit') Update profile      
+
+
+      //- SKILLS SECTION START 
+      .row
+        .col
+          .profile-section.mt-3.mb-2
+            h1.text-center Skill Section
+          h4 1. Add Skill
+          form(action="/addskill", method="post") 
+            .input-group.mb-3
+              input.inp5.form-control(type="text")
+
+              .input-group-append
+                input.inp5.my-2.my-sm-0.form-control( type='text' aria-label="Recipient's username"  placeholder="percentage")
+                button#btn5.btn.btn-outline-secondary(type='button')
+                    i.fa.fa-lock
+            button.btn.mybtn.btn-outline-success.text-center(type='submit') Add skill
+          
+          h4 2. Update Skills
+          form(action="/updateskill", method="post") 
+            .input-group.mb-3
+              select#inputGroupSelect02.custom-select
+                option(selected='') Select skill
+                each val in skill_set
+                  option(value=val.skill_name) #{val.skill_name} = #{val.percent}%
+
+              .input-group-append
+                input#inp5.my-2.my-sm-0.form-control( type='text' aria-label="Recipient's username"  placeholder="update percentage")
+                button#btn5.btn.btn-outline-secondary(type='button')
+                    i.fa.fa-lock
+            button#btn2.btn.mybtn.btn-outline-success.text-center(type='submit') Update skill
+          h4 2. Delete Skills
+          form(action="/deleteskill", method="post") 
+            .input-group.mb-3
+              select#inputGroupSelect02.custom-select
+                option(selected='') Select skill to delete
+                each val in skill_set
+                  option(value=val.skill_name) #{val.skill_name} = #{val.percent}%
+              .input-group-append
+                button#inputGroupFileAddon02.btn.btn-outline-danger.my-2.my-sm-0.form-control(type='button' onclick = 'this.form.submit();' ) Delete
+                button#btn5.btn.btn-outline-secondary(type='button')
+                    i.fa.fa-lock
+
+      //- .row
+      //-   .col-lg-7
+      //-     #profile.profile-section.mt-3
+      //-       h1 News section :
+      //-       form(action="/updatenews", method="post") 
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputname') Name :
+      //-           input.form-control(name='name' type='text' aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.name)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputext') Typed-text :
+      //-           input.form-control( name='text' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.typed_text)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputheading') Heading :
+      //-           input#inputheading.form-control( name='heading' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputheadingpara') Heading-para :
+      //-           input#inputheadingpara.form-control( name='headingpara' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading_para)
+      //-           .input-group-append
+      //-             button.btn.btn-outline-secondary(type='button' ) Update
+      //-         button.btn.mybtn.btn-outline-success.text-center(type='submit') Update profile      
+      //-   .col-lg-5.imgbox
+      //-     //- img.rounded.mx-auto.d-block.imgg(src= 'data:image/png;base64,'+ profile_set.img.data alt='Hero Image' height='height: 10%;')
+      //-     // <img src=" alt="" class="src" >
+      //-     form(action="/uploadpimg" method="post" enctype="multipart/form-data")
+      //-       .form-group
+      //-         label(for='exampleFormControlFile1') Example file input
+      //-         input#exampleFormControlFile1.form-control-file(type='file' name='image')
+      //-       input.btn.btn-outline-success.my-2.my-sm-0.form-control(  type='button' aria-label="Recipient's username" aria-describedby='button-addon2' value='upload' onclick = 'this.form.submit();')
+      
+      
+      
+      //- .row
+      //-   .col-lg-7
+      //-     #profile.profile-section.mt-3
+      //-       h1 project section :
+      //-       form(action="/updateprojects", method="post") 
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputname') Name :
+      //-           input.form-control(name='name' type='text' aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.name)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputext') Typed-text :
+      //-           input.form-control( name='text' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.typed_text)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputheading') Heading :
+      //-           input#inputheading.form-control( name='heading' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading)
+      //-           .input-group-append
+      //-             button#button-addon2.btn.btn-outline-secondary(type='button' ) Update
+      //-         .input-group.mb-3
+      //-           label.col-sm-2.col-form-label(for='inputheadingpara') Heading-para :
+      //-           input#inputheadingpara.form-control( name='headingpara' type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2' value= profile_set.heading_para)
+      //-           .input-group-append
+      //-             button.btn.btn-outline-secondary(type='button' ) Update
+      //-         button.btn.mybtn.btn-outline-success.text-center(type='submit') Update profile      
+      //-   .col-lg-5.imgbox
+      //-     //- img.rounded.mx-auto.d-block.imgg(src= 'data:image/png;base64,'+ profile_set.img.data alt='Hero Image' height='height: 10%;')
+      //-     // <img src=" alt="" class="src" >
+      //-     form(action="/uploadpimg" method="post" enctype="multipart/form-data")
+      //-       .form-group
+      //-         label(for='exampleFormControlFile1') Example file input
+      //-         input#exampleFormControlFile1.form-control-file(type='file' name='image')
+      //-       input.btn.btn-outline-success.my-2.my-sm-0.form-control(  type='button' aria-label="Recipient's username" aria-describedby='button-addon2' value='upload' onclick = 'this.form.submit();')
+
+            
+
+            //- button.btn.btn-secondary.mx-auto.d-block.mt-3(type='button') change image
+    // Optional JavaScript; choose one of the two!
+    // Option 1: jQuery and Bootstrap Bundle (includes Popper)
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
+    <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+    <script src= 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'></script>
+    //
+      Option 2: jQuery, Popper.js, and Bootstrap JS
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    script(src="admin.js") 
